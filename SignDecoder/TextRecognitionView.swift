@@ -35,6 +35,7 @@ struct TextRecognitionView: View {
             TranslationView(text: textRecognizer?.recognizedText ?? "", isProcessing: isProcessing)
         }
         .padding()
+        .trailThem()
         .navigationTitle("Sign info")
     }
     private var isProcessing: Bool {

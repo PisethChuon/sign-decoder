@@ -39,7 +39,14 @@ struct TranslationView: View {
                 showingTranslation = true
             } label: {
                 Text("Translate")
+                    .frame(height: 50)
+                    .frame(maxWidth: .infinity)
+                    .font(.title2.bold())
+                    .foregroundColor(.white)
+                    .background(RoundedRectangle(cornerRadius: 8))
             }
+            .disabled(text.isEmpty)
+            .padding(.top)
         }
     }
 }
