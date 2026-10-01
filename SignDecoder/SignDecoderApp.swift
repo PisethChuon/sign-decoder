@@ -11,7 +11,7 @@ import SwiftUI
 struct SignDecoderApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TextRecognitionView(imageResource: .sign1)
         }
     }
 }
