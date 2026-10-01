@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import Vision
 
 struct TextRecognitionView: View {
     let imageResource: ImageResource
+    let boundingColor = Color(red: 1.00, green: 0.00, blue: 0.85)
     @State private var textRecognizer: TextRecognizer?
     
     var body: some View {
@@ -20,12 +22,23 @@ struct TextRecognitionView: View {
                 .task {
                     textRecognizer = await TextRecognizer(imageResource: imageResource)
                 }
+                .overlay {
+                    if let observations = textRecognizer?.observations {
+                        ForEach(observations, id: \.uuid) { observation in
+                            BoundsRect(normalizedRect: observation.boundingBox)
+                                .stroke(boundingColor, lineWidth: 3)
+                        }
+                    }
+                }
             Spacer()
             
-            TranslationView(text: textRecognizer?.recognizedText ?? "")
+            TranslationView(text: textRecognizer?.recognizedText ?? "", isProcessing: isProcessing)
         }
         .padding()
         .navigationTitle("Sign info")
+    }
+    private var isProcessing: Bool {
+        textRecognizer == nil
     }
 }
 

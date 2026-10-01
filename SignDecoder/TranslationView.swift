@@ -10,6 +10,7 @@ import Translation
 
 struct TranslationView: View {
     var text: String
+    var isProcessing: Bool
     @State private var showingTranslation = false
     
     var body: some View {
@@ -27,6 +28,11 @@ struct TranslationView: View {
                        alignment: .topLeading)
                 .padding()
                 .background(Color(white: 0.9))
+                .overlay {
+                    if isProcessing {
+                        ProgressView()
+                    }
+                }
                 .translationPresentation(isPresented: $showingTranslation, text: text)
             
             Button {
@@ -39,5 +45,9 @@ struct TranslationView: View {
 }
 
 #Preview {
-    TranslationView(text: "Caution, falling rocks")
+    TranslationView(text: "Caution, falling rocks", isProcessing: false)
+}
+
+#Preview {
+    TranslationView(text: "", isProcessing: true)
 }
