@@ -11,7 +11,7 @@ import SwiftUI
 struct SignDecoderApp: App {
     var body: some Scene {
         WindowGroup {
-            TranslationView(text: "Caution, falling rocks")
+            ContentView()
         }
     }
 }
